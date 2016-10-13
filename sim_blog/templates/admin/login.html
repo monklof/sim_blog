@@ -1,0 +1,102 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<section class="container" >
+  <h1>Admin</h1>
+  <form class="form-horizontal" id="input-form">
+    {% module xsrf_form_html()%}
+    <div class="form-group">
+	  <label class="col-sm-3 label-control">Username:</label>
+      <div class="col-sm-8">
+		<input class="form-control" type="text" name="username" id="username-input"  >
+      </div>
+    </div>
+    <div class="form-group">
+	  <label class="col-sm-3 label-control">Password:</label>
+      <div class="col-sm-8">
+		<input class="form-control" type="password" name="password" id="password-input"  >
+      </div>
+    </div>
+	<small class="login-hint hidden">ahahah</small>
+	<br />
+	<a class="btn btn-large btn-default" id="submit-btn" >Login</a>
+  </form>
+</section>
+{% end %}
+
+{% block tail-js%}
+    <script src="{{static_url('js/sha256.js')}}"></script>
+    <script>
+window.onload = function(){
+     $("#submit-btn").click(function(evt){
+       evt.preventDefault();
+       var username = $("#username-input").val().trim();
+       var password = $("#password-input").val().trim();
+//       var capid = Number($("#signin-cap\\\\[code\\\\]").data("id"));
+//       var capcode = $("#signin-cap\\\\[code\\\\]").val().trim();
+       $(".login-hint").addClass("hidden");
+
+       if (!username || !password) {
+         $(".login-hint").text("Please Enter Your USERNAME and PASSWORD").removeClass("hidden");
+         return ;
+       }
+
+//       if (!capcode){
+//         $("#signin-login-hint").text("请输入验证码");
+//         $("#signin-login-hint").show();
+//         return ;
+//       }
+       password = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+       
+       var args = {
+         username:username,
+         password:password,
+         _xsrf:document.getElementsByName("_xsrf")[0].value
+       }
+//       args["cap[id]"]=capid;
+//       args["cap[code]"]=capcode;
+       $.ajax({
+         type:"POST",
+         url:"/admin/login/",
+         data:$.param(args),
+         success:function(res){
+           if (res.success){
+             location = res.next;
+           }else{
+//             refreshCap(res.capid, res.capsrc);
+             $(".login-hint").text(res.errorText).removeClass("hidden");
+           }
+         },
+         error:function(res){
+           $(".login-hint").text("Network Error").removeClass("hidden");
+         }
+       });
+     });
+};
+    </script>
+{% end %}
+{% block head-css%}
+<style type="text/css">
+ .login-hint{
+   color:red;
+ }
+ @media (min-width:300px){
+   section.container {
+     width: 400px;
+   }
+ }
+ @media (max-width:300px){
+   section.container{
+     width: 100%;
+   }
+ }
+ section.container{
+   margin-top: 80px;
+ }
+
+ body form {
+   margin-top: 25px;
+ }
+</style>
+
+{% end%}

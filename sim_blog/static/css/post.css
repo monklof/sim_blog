@@ -1,0 +1,200 @@
+H1 {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+    margin-bottom: 60px;
+    margin-bottom: 40px;
+    padding: 5px;
+    border-bottom: 2px LightGrey solid;
+    width: 90%;
+    line-height: 150%;
+    color: #666666;
+}
+
+
+H2 {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    border-bottom: 1px LightGrey solid;
+    width: 80%;
+    line-height: 150%;
+    color: #666666;
+}
+
+
+H3 {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    border-bottom: 1px LightGrey solid;
+    width: 80%;
+    line-height: 150%;
+    color: #666666;
+}
+
+H4, H5, H6 {
+     font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+    line-height: 150%;
+    color: #666666;
+}
+
+li {
+    margin-left: 10px;
+}
+
+
+blockquote {
+    border-left: 4px lightgrey solid;
+    padding-left: 5px;
+    margin-left: 20px;
+}
+
+
+pre {
+    font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
+    font-size: 75%;
+    border: solid 1px lightgrey;
+    background-color: Ivory;
+    padding: 5px;
+    line-height: 130%;
+    margin-left: 10px;
+    width: 95%;
+}
+
+
+code {
+    font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
+    font-size: 90%;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+
+.post-body {
+    padding: 1px 3px 10px 15px;
+}
+
+h1.post-title{
+    width:100%;
+}
+
+a:link, a:visited, a:active {
+    color: #778087;
+    text-decoration: none;
+}
+
+a.dark:link, a.dark:visited, a.dark:active {
+    color: gray;
+    text-decoration: none;
+}
+a.dark:hover {
+    color: #385f8a;
+    text-decoration: none;
+}
+
+.tag-buttons {
+    margin-top: 40px;
+    padding: 5px;
+    font-size: 14px;
+    line-height: 120%;
+    background: #eeeeee;
+    background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc));
+    background: -webkit-linear-gradient(top, #eeeeee 0%,#cccccc 100%);
+    background: -o-linear-gradient(top, #eeeeee 0%,#cccccc 100%);
+    background: -ms-linear-gradient(top, #eeeeee 0%,#cccccc 100%);
+    background: linear-gradient(to bottom, #eeeeee 0%,#cccccc 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+    border-radius: 0px 0px 3px 3px;
+    text-align: left;
+}
+
+a.tb:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #000;
+    text-decoration: none;
+    border-radius: 15px;
+}
+a.tb:link, a.tb:visited, a.tb:active {
+    font-size: 11px;
+    line-height: 12px;
+    color: #333;
+    text-decoration: none;
+    display: inline-block;
+    padding: 3px 10px 3px 10px;
+    border-radius: 15px;
+    text-shadow: 0px 1px 0px #fff;
+}
+.comment-content{
+    font-size: 14px;
+    line-height: 1.6;
+    color: #000;
+}
+
+.post-comments .auther-head{
+    padding-top:10px;
+}
+
+
+.post-wrapper img {
+    display: block;
+    max-width: 91%;
+    box-shadow: 0 0 10px #555;
+    border-radius: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 0 10px #555;
+}
+
+
+hr {
+    color: LightGrey;
+}
+
+.post-comments, .post-comment-yourself{
+    margin-top: 20px;
+}
+.post-comments .avatar-home{
+    max-width: 70px;
+    margin-right: 8px;
+}
+
+
+.post-comment-yourself label {
+    width: 90px;
+}
+
+#author_name, #author_email, #author_url{
+    max-width: 200px;
+}
+
+img.cap_src{
+    display: inline-block;
+    width: 120px;
+    height: 30px;
+    margin-left: 106px;
+}
+
+input.cap_code{
+  display: inline-block;
+  width: 70px;
+  height: 29px;
+  margin-top: 5px;
+  position: relative;
+  top: 2px;
+  margin-left: 7px;
+}
+
+#btn-submit{
+    display: inline-block;
+    margin-left: 48px;
+}
+
+
+@media screen and (max-width:600px){
+    .container {
+        width: 100%;
+        padding: 0;
+    }
+}

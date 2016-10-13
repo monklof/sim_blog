@@ -1,0 +1,37 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+{% set post = context['post']%}
+{% set author = context.get("author", dict(author_name="", author_url="", author_email="")) %}
+
+<div class="blog-post">
+  <div class="post-title">
+    <h1 class="title">{{post.title}}</h1>
+    <p class=date>{{post.pub_date.date()}}</p>
+  </div>
+
+  <div class="post-body">
+
+    {% raw post.html_text %}
+
+
+    {% if len(post.tags) > 0 %}
+    <div class="tag-buttons">
+      标签： 
+      {% for t in post.tags%}
+      <a href="{{reverse_url('tag')}}#{{t.text}}" >#{{t.text}}</a> &nbsp;
+      {% end %}
+
+    </div>
+    {% end %}
+  </div>
+
+  {% module Template('module-comment.html', post=post, author=author)%}
+
+  {% end %}
+</div>
+
+
+
+

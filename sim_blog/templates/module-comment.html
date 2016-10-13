@@ -1,0 +1,68 @@
+{# 提供参数post, 作者author #}
+
+
+{{set_resources(javascript_files=['js/module-comment.js'], css_files=['css/module-comment.css'])}}
+
+<div id="module-comment">
+{% from models import COMMENT_STATE %}
+{% if len(post.comments)%}
+<h3>参与讨论</h3>
+<div class="post-comments">
+  {% set i = 0%}
+  {% for c in post.comments%}
+  {% if c.state == COMMENT_STATE.ACTIVE%}
+  {% set i = i+1%}
+  <div class="comment" >
+    <div>
+      <a id="c-{{c.id}}" href="#c-{{c.id}}" class="floor">#{{i}}</a> &nbsp;
+      <a href="{{c.author_url}}#" class="author_name">{{c.author_name}}</a>
+      <span class="date">{{c.pub_date.strftime("%Y-%m-%d %H:%M")}}</span>
+      <span class="at-comment" data-author="{{c.author_name}}">评论</span>
+    </div>
+    <p>
+      {% raw c.html_text %}
+    </p>
+  </div>
+  {% end %}
+  {% end%}
+</div>
+{% end %}
+
+<h3>评论一下</h3>
+<div class="post-comment-yourself">
+  
+
+  <form id="form-comment" action="{{handler.reverse_url('comment', post.id)}}" method="POST">
+
+    <textarea id="text" name="text" class="form-control" rows="4"  required placeholder="评论在这儿">
+    </textarea>
+    <div>
+      <label><span class="item">#1</span> 你的大名：</label>
+      <input id="author_name" name="author_name" value="{{author['author_name']}}" class="form-control" type="text" required>
+    </div>
+
+    <div>
+      <label><span class="item">#2</span> 你的邮箱：</label>
+      <input id="author_email" name="author_email" value="{{author['author_email']}}"  class="form-control" type="email" required>
+    </div>
+    
+    <div>
+      <label><span class="item">#3</span> 个人链接：</label>
+      <input id="author_url" name="author_url" value="{{author['author_url']}}"  class="form-control" type="url"  placeholder="可不填">
+    </div>
+
+    <div>
+      <label><span class="item">#4</span> 验证码：</label>
+      <img class="cap_src" src="" alt="Captcha"/>
+      <input id="cap_id" class="cap_id hide" name="cap_id" value=""/>
+      <input id="cap_code" class="cap_code form-control" name="cap_code" required/>
+      <button id="btn-submit" class="btn btn-success">提交</button>
+    </div>
+
+
+    <p class="hide cell comment-msg bg-danger"></p>
+  </form>
+
+</div>
+
+</div>

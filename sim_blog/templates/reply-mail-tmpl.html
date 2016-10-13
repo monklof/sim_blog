@@ -1,0 +1,20 @@
+hi,
+
+<a href="{{comment.author_url or '#'}}">{{comment.author_name}}</a>在博文<a href="http://monklof.com{{reverse_url('post', post.id)}}">{{post.title}}</a>中回复了你的评论，他说：
+
+<br />
+<br />
+
+<blockquote>
+  {{comment.text}}
+</blockquote>
+
+<br />
+
+{% set cmt_link = "http://monklof.com%s#c-%d" % (reverse_url('post', post.id), comment.id) %}
+
+请在这里查看： <a href="{{cmt_link}}">{{cmt_link}}</a>
+
+<br />
+<br />
+from <a href="http://monklof.com">monklof.com</a>

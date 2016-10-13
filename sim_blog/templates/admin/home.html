@@ -1,0 +1,58 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<div class="row" style="padding-top: 70px">
+  <div class="container center-block">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title" style="display:inline-block;">Blog</h3>
+          <a href="{{reverse_url('adminAddPost')}}" class="pull-right" style="display:inline-block">Add Post</a>
+        </div>
+        
+        <table class="table">
+          <tr>
+            <th>title</th>
+            <th>Published?</th>
+            <th>Operation</th>
+            <th>Operation</th>
+          </tr>
+          {% for post in posts%}
+          <tr>
+            <td><a href="{{reverse_url('adminViewPost', post.id)}}">{{post.title}}</a></td>
+            <td>
+              {% if post.is_published %} YES
+              {% else %} NO
+              {% end %}
+            </td>
+            <td><a href="{{reverse_url('adminEditPost', post.id)}}">Edit</a></td>
+            <td>
+              <a href="#" class="delete-post" data-id="{{post.id}}" onclick="deletePost({{post.id}})">Delete</a>
+              <form class="hidden" method="POST" action="{{reverse_url('adminDeletePost', post.id)}}">
+                {% module xsrf_form_html()%}
+                <input type="text" name="post_id" value="{{post.id}}">
+                <input type="submit" id="submit-delete-btn_{{post.id}}">
+              </form>
+            </td>
+          </tr>
+          {% end %}
+        </table>
+      </div>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+</div>
+{% end %}
+
+{% block tail-js%}
+<script>
+ function deletePost(postId){
+   if (confirm("Are you sure to delete ?")){
+     $("#submit-delete-btn_"+postId).click();
+   }
+   console.log("delete canceled");
+ }
+</script>
+{% end %}

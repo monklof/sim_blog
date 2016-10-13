@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+
+{% block head-meta%}
+<meta name="description" content="monklof's blog: freedom, open, share and act">
+{% end %}
+
+{% block content%}
+  <div class=entry-wrapper>
+    {% for post in posts%}
+    <div class=entry-overview>
+      <div class="date hide-sm">{{post.pub_date.date()}}</div>
+      <div class=detail><h1>
+        <a href="{{handler.reverse_url('post', post.id)}}">{{post.title}}</a></h1>
+        {% if post.summary%}
+        <div class="summary"><p>{{post.summary}}</p></div>
+        {%end%}
+      </div>
+    </div>
+    {% end%}
+  </div>
+  <div class=pagination>
+    {% if pre%}
+    <a href="{{reverse_url('home')}}?page={{pre}}">上一页 &laquo;</a>
+    {% else %}
+    <span class=disabled>&laquo; 上一页</span> 
+    {% end%}
+    — <strong>{{page}}</strong> — 
+    {% if next %}
+    <a href="{{reverse_url('home')}}?page={{next}}">下一页 &raquo;</a>
+    {% else %}
+    <span class=disabled>&raquo; 下一页</span> 
+    {% end %}
+  </div>
+
+{% end %}

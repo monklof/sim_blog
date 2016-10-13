@@ -1,0 +1,30 @@
+* TODO 增加WIKI分类
+* DONE 增加验证码
+* DONE 增加标签功能
+* TODO 增访问统计
+* DONE 修改Markdown编译引擎，改为全部支持GFM的
+  - Note taken on [2015-02-26 Thu 07:41] \\
+    实现方法采用marked外引擎实现(https://github.com/chjj/marked) 该引擎使用nodejs做的
+* TODO 修改主体风格
+  - Note taken on [2015-02-13 Fri 01:40] \\
+    导航栏豆沙绿，标题无下划线，code样式调为无背景，评论内容溢出问题。
+* DONE 增加主页描述(SEO)
+* TODO 将博客包装成一个服务，用命令启动、重启和停止
+* TODO 静态文件nginx配置
+* DONE 访客cookie，保存访客信息
+  - Note taken on [2015-05-12 Tue 05:00] \\
+    访客信息存放在cookie中好了
+* DONE 增加评论交互
+  - Note taken on [2015-07-18 Sat 20:53] \\
+    1. 用户留言邮件通知管理员
+    2. 用户相互@评论可以收到邮件通知
+* TODO 优化评论框，增加评论体验
+* DONE 后台管理增加评论删除功能/垃圾评论检测办法
+
+
+风格变化可以参考：
+http://www.gnu.org/software/emacs/manual/html_node/emacs/Indentation-Commands.html
+* TODO 主题优化
+  - Note taken on [2015-07-30 Thu 09:03] \\
+    1. 代码高亮，代码间距调整
+    2. 调整图片大小

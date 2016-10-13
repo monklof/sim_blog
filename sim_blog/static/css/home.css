@@ -1,0 +1,23 @@
+a {
+    display: block;
+}
+
+.title {
+    cursor: pointer;
+}
+
+li.title:hover {
+    background-color: #eee;
+}
+
+
+.panel-default > .panel-heading {
+	background-image: none;
+	background-color: #fff;
+}
+
+.navbar-default {
+	background-image: none;
+	background-color: #fff;
+  box-shadow: none;
+}

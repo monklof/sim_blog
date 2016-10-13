@@ -1,0 +1,153 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+{% from models import COMMENT_STATE%}
+
+{% if post%}
+  {% set title=post.title %}
+  {% set text=post.md_text%}
+  {% set p_tags=" ".join([t.text for t in post.tags])%}
+  {% set summary=post.summary%}
+  {% if post.is_published%}
+    {% set checked="checked"%}
+  {% else %}
+    {% set checked=""%}
+  {% end %}
+{% else %}
+  {% set title="" %}
+  {% set text="" %}
+{% set checked=""%}
+{% set p_tags = ""%}
+{% set summary= ""%}
+{% end %}
+
+<div class="row" style="padding-top: 70px">
+  <div class="container center-block">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title" style="display:inline-block;">Edit Post</h3>
+          <a href="{{reverse_url('adminHome')}}" class="pull-right" style="display:inline-block">Back</a>
+        </div>
+        <div class="panel-body">
+          <form method="POST" id="form-post" enctype='application/json'>
+            {% if error_msg_text%}
+            <p class="text-danger">{{error_msg_text}}</p>
+            {% end %}
+            <div class="form-group">
+              {% module xsrf_form_html() %}
+              <label>Post Title</label>
+              <input name="title" type="text" class="form-control" id="input-title" placeholder="Enter title here" value="{{title}}">
+            </div>
+
+
+            <div class="form-group">
+              <label>Post Content(markdown)</label>
+              <textarea name="md_text" id="input-md_text" class="form-control" placeholder="Enter Your Content Here" rows="26">{% raw text %}
+              </textarea>
+              <p class="help-block">Note: </p>
+            </div>
+
+            <div class="tag form-group">
+              <label>Taged as(Use space to split): </label>
+              <input name="tags" id="input-tags" class="form-control" value="{{p_tags}}"/>
+            </div>
+
+            <ul class="saved-tags form-group">
+              {% for t in tags%}
+              <li><a class="btn btn-default tag-button {{'active' if t.text in p_tags else ''}}" data-text="{{t.text}}">{{t.text}}</a></li>
+              {% end %}
+            </ul>
+
+            <div class="form-group">
+              <label>Summary</label>
+              <input class="form-control" id="summary" name="summary" value="{{summary}}">
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="btn-submit">Save and Preview</button>
+            <label><input type="checkbox" name="is_published" id="input-is_published" value="true" {{checked}}> Publish</label>
+          </form>
+        </div>
+      </div>
+      {% if post %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title" style="display:inline-block;">Comments</h3>
+        </div>
+        <p class="hide bg-info comment-msg-info"></p>
+        
+        <table class="table comment-table">
+          <tr>
+            <th>Comment</th>
+            <th>Author</th>
+            <th>Operation</th>
+          </tr>
+          {% for c in post.comments%}
+          {% if c.state == COMMENT_STATE.ACTIVE%}
+          <tr>
+            <td class="col-comment wbreak">{{c.text}}</td>
+            <td class="col-author wbreak"><a href="{{c.author_url}}">{{c.author_name}}</a></td>
+            <td class="col-op">
+              <a href="#" class="delete-comment" data-id="{{c.id}}">Delete</a>
+            </td>
+          </tr>
+          {% end %}
+          {% end %}
+        </table>
+      </div>
+      {% end %}
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+</div>
+
+
+
+{% end %}
+
+{% block head-css %}
+<style >
+.comment-table{
+   table-layout: fixed;
+}
+   
+.wbreak{
+    word-wrap: break-word;
+}
+
+table .col-comment {
+   width: 70%;
+   box-sizing: boder-box;
+}
+table .col-author{
+   box-sizing: boder-box;
+   max-width: 20%;
+   min-width: 40px;
+   width: 20%;
+}
+table .col-delete{
+   box-sizing: border-box;
+   width: 40px;
+ }
+
+ .comment-msg-info{
+     padding: 10px 17px;
+ }
+
+ul.saved-tags li {
+   display: inline;
+}
+
+ul.saved-tags {
+  padding-left: 0px;
+}
+</style>
+{% end%}
+
+{% block tail-js%}
+<script src='{{static_url("js/edit-post.js")}}'></script>
+
+{% end %}

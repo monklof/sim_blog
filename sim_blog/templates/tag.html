@@ -1,0 +1,27 @@
+{% extends base.html%}
+
+{% block content%}
+
+<ul class="tagcloud">
+  {% for t in tags%}
+  <li><a style="font-size:{{max(100, min(400, 100 * len(tags[t])/avg))}}%;" href="#{{t}}">{{t}}</a></li>
+  {% end %}
+</ul>
+
+<div class="blog-tag">
+{% for t in tags%}
+{% if len(tags[t]) != 0%}
+<ul><span class="tag" id="{{t}}">{{t}}</span>
+  <ul>
+    {% for p in tags[t]%}
+    <li><span class="date">{{p.pub_date.date()}}</span><a href="{{reverse_url('post', p.id)}}">{{p.title}}</a></li>
+    {% end %}
+  </ul>
+</ul>
+{%end%}
+{% end %}
+
+</div>
+
+
+{% end %}

@@ -1,0 +1,8 @@
+#/usr/bin/env sh
+
+BASEDIR=$(dirname $(dirname $(readlink  -f $0)))
+SCRIPT=${BASEDIR}/sim_blog/app.py
+LOGFILE=${BASEDIR}/simblog.log
+
+nohup $SCRIPT 2>&1 > $LOGFILE &
+
